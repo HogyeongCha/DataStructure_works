@@ -31,7 +31,7 @@ class BinarySearchTree:
   # Return the root node of the tree
   def arrayToBST(self, arr, l, r): # time complexity: O(n)
     # Practice 5
-    for i in range(len(arr)-1):
+    for i in range(len(arr)-1):  # time complexity: O(n)
       if arr[i] > arr[i+1]:
         return None
     if l > r:
@@ -53,7 +53,7 @@ class BinarySearchTree:
     return current
 
   # Return the node with the maximum value 
-  def findMax(self):  # time complexity: O(n)
+  def findMax(self): # time complexity: O(n)
     # Practice 5
     if not self.root:
       return None
@@ -105,10 +105,10 @@ class BinarySearchTree:
   # Given a query, search for the node whose key is equal to query.
   # If the node exists, return the key
   # Otherwise, return nullptr  
-  def search(self, query):  # time complexity: O(n)
+  def search(self, query): # time complexity: O(n)
     # Practice 6
     current = self.root
-    def s(current, query):  # time complexity: O(n)
+    def s(current, query): # time complexity: O(n)
       if current is None:
         return None
       if current.key == query:
@@ -121,10 +121,10 @@ class BinarySearchTree:
   
   # Given an output file, write the keys of all the nodes 
   # visited in inorder traversal
-  def writeInorder(self, outFile):  # time complexity: O(n)
+  def writeInorder(self, outFile): # time complexity: O(n)
     # Practice 6
-    def inorder(node):
-      if node is not None:  # time complexity: O(n)
+    def inorder(node): # time complexity: O(n)
+      if node is not None:
         inorder(node.left)
         outFile.write(str(node.key) + " ")
         inorder(node.right)
@@ -145,9 +145,9 @@ class BinarySearchTree:
     
   # Given an output file, write the keys of all the nodes 
   # visited in postorder traversal
-  def writePostorder(self, outFile):  # time complexity: O(n)
+  def writePostorder(self, outFile): # time complexity: O(n)
     # Practice 6
-    def postorder(node):  # time complexity: O(n)
+    def postorder(node): # time complexity: O(n)
       if node is not None:
         postorder(node.left)
         postorder(node.right)
@@ -157,7 +157,7 @@ class BinarySearchTree:
 
   # If node with key k alreay exists in the tree, do nothing
   # Otherwise, insert new node with key k 
-  def insertNode(self, k):  # time complexity: O(n)
+  def insertNode(self, k): # time complexity: O(n)
     # Practice 7
     def insert(current, k): # time complexity: O(n)
       if current is None:
@@ -171,7 +171,7 @@ class BinarySearchTree:
 
   # If deletion fails, immediately terminate the program
   # Otherwise, delete the node with key k
-  def deleteNode(self, k):  # time complexity: O(n)
+  def deleteNode(self, k): # time complexity: O(n)
     # Practice 7
     def delete(current, k): # time complexity: O(n)
       if current is None:
