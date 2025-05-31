@@ -1,5 +1,4 @@
 import sys
-
 ADD = 'A'
 DELETE = 'D'
 FIND = 'F'
@@ -13,8 +12,9 @@ class Student:
 class Course:
   def __init__(self):
     self.head = None
+    self.tail = None
     self.size = 0
-    
+
   def __len__(self):
     return self.size
 
@@ -24,56 +24,53 @@ class Course:
   def addStudent(self, newID, newName):
     if self.find(newID):
       return False
-    
     newStudent = Student(newID, newName)
-    if self.isEmpty() or newID < self.head.id:
-      newStudent.next = self.head
+    if self.isEmpty():
       self.head = newStudent
+      self.tail = newStudent
     else:
-      prve = None
-      current = self.head
-      while current and current.id < newID:
-        prve = current
-        current = current.next
-      
-      newStudent.next = current
-      prve.next = newStudent
-    
+      self.tail.next = newStudent
+      self.tail = newStudent
     self.size += 1
     return True
-  
-  def deleteStudent(self, queryID):
-    prev, curr = None, self.head
-    while curr and curr.id != queryID:
-      prev, curr = curr, curr.next
 
-    if not curr:
+  def deleteStudent(self, queryID):
+    if self.isEmpty():
       return False
-    
-    if not prev:
-      self.head = curr.next
-    else:
-      prev.next = curr.next
-    
-    self.size -= 1
-    return True
+    prev = None
+    curr = self.head
+    while curr:
+      if curr.id == queryID:
+        if prev:
+          prev.next = curr.next
+        else:
+          self.head = curr.next
+        if curr == self.tail:
+          self.tail = prev
+        self.size -= 1
+        return True
+      prev = curr
+      curr = curr.next
+    return False
 
   def find(self, queryID):
+    if self.isEmpty():
+      return False
     curr = self.head
     while curr:
       if curr.id == queryID:
         return curr
       curr = curr.next
-    return None
+    return False
 
   def write(self, outFile):
-    result = []
-    curr = self.head
-    while curr:
-      result.append(f"{curr.id} {curr.name}")
-      curr = curr.next
-    outFile.write(" ".join(result) + "\n")
-  
+    if not self.isEmpty():
+      curr = self.head
+      while curr:
+        outFile.write(str(curr.id) + " " + curr.name + "\n")
+        curr = curr.next
+    outFile.write("\n")
+
 if __name__ == "__main__":
   if len(sys.argv) != 3:
     raise Exception("Correct usage: [program] [input] [output]")
@@ -103,7 +100,7 @@ if __name__ == "__main__":
           outFile.write("Deletion failed\n")
       elif op == FIND:
         if len(words) != 2:
-          raise Exception("Find: invalid input")
+          raise Exception("DELETE: invalid input")
         i = int(words[1])
         found = course.find(i)
         if not found:
@@ -112,3 +109,4 @@ if __name__ == "__main__":
           outFile.write(str(found.id) + " " + found.name + "\n")
       else:
         raise Exception("Undefined operator")
+        

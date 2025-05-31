@@ -29,42 +29,19 @@ class BinarySearchTree:
   # Given a sequence arr of integers, start index l, the end index r, 
   # build a binary search (sub)tree that contains keys in arr[l], ..., arr[r].
   # Return the root node of the tree
-  def arrayToBST(self, arr, l, r): # time complexity: O(n^2)
+  def arrayToBST(self, arr, l, r):
     # Practice 5
-    if l == 0 and r == len(arr) - 1:
-      for i in range(len(arr) - 1):
-        if arr[i] > arr[i + 1]:
-          return None
-  
-    if l > r: # base case
-      return None
-    
-    mid = (l + r) // 2
-    root = TreeNode(arr[mid])
-
-    root.left = self.arrayToBST(arr, l, mid - 1)
-    root.right = self.arrayToBST(arr, mid + 1, r)
-    return root
+    pass
 
   # Return the node with the minimum value 
-  def findMin(self): # time complexity: O(log n)
+  def findMin(self):
     # Practice 5
-    if not self.root:
-      return None
-    current = self.root
-    while current.left:
-      current = current.left
-    return current
+    pass
 
   # Return the node with the maximum value 
-  def findMax(self): # time complexity: O(log n)
+  def findMax(self):
     # Practice 5
-    if not self.root:
-      return None
-    current = self.root
-    while current.right:
-      current = current.right
-    return current
+    pass
 
   def _getHeight(self, curr):
     if not curr:
@@ -109,93 +86,45 @@ class BinarySearchTree:
   # Given a query, search for the node whose key is equal to query.
   # If the node exists, return the key
   # Otherwise, return nullptr  
-  def search(self, query):  # time complexity: O(log n)
+  def search(self, query):
     # Practice 6
-    current = self.root
-    def s(current, query):
-      if current is None:
-        return None
-      if current.key == query:
-        return current
-      elif query < current.key:
-        return s(current.left, query)
-      else:
-        return s(current.right, query)
-    return s(current, query)
-  
+    # TODO
+    pass
+
   # Given an output file, write the keys of all the nodes 
   # visited in inorder traversal
-  def writeInorder(self, outFile): # time complexity: O(log n)
+  def writeInorder(self, outFile):
     # Practice 6
-    def inorder(node):
-      if node is not None:
-        inorder(node.left)
-        outFile.write(str(node.key) + " ")
-        inorder(node.right)
-    inorder(self.root)
-    outFile.write("\n")
-    
+    # TODO
+    pass
+
   # Given an output file, write the keys of all the nodes 
   # visited in preorder traversal
-  def writePreorder(self, outFile): # time complexity: O(log n)
+  def writePreorder(self, outFile):
     # Practice 6
-    def preorder(node):
-      if node is not None:
-        outFile.write(str(node.key) + " ")
-        preorder(node.left)
-        preorder(node.right)
-    preorder(self.root)
-    outFile.write("\n")
-    
+    # TODO
+    pass
+  
   # Given an output file, write the keys of all the nodes 
   # visited in postorder traversal
-  def writePostorder(self, outFile): # time complexity: O(log n)
+  def writePostorder(self, outFile):
     # Practice 6
-    def postorder(node):
-      if node is not None:
-        postorder(node.left)
-        postorder(node.right)
-        outFile.write(str(node.key) + " ")
-    postorder(self.root)
-    outFile.write("\n")
-
+    # TODO
+    pass
+  
   # If node with key k alreay exists in the tree, do nothing
   # Otherwise, insert new node with key k 
-  def insertNode(self, k): # time complexity: O(log n)
+  def insertNode(self, k):
     # Practice 7
-    def insert(current, k):
-      if current is None:
-        return TreeNode(k)
-      elif k < current.key:
-        current.left = insert(current.left, k)
-      elif k > current.key:
-        current.right = insert(current.right, k)
-      return current
-    self.root = insert(self.root, k)
+    # TODO
+    pass
 
   # If deletion fails, immediately terminate the program
   # Otherwise, delete the node with key k
-  def deleteNode(self, k): # time complexity: O(log n)
+  def deleteNode(self, k):
     # Practice 7
-    def delete(current, k):
-      if current is None:
-        return current
-      if k < current.key:
-        current.left = delete(current.left, k)
-      elif k > current.key:
-        current.right = delete(current.right, k)
-      else:
-        if current.left is None:
-          return current.right
-        elif current.right is None:
-          return current.left
-        successor = current.right
-        while successor.left:
-          successor = successor.left
-        current.key = successor.key
-        current.right = delete(current.right, successor.key)
-      return current
-    self.root = delete(self.root, k)
+    # TODO
+    pass
 
 if __name__ == "__main__":
   if len(sys.argv) != 3:
@@ -233,37 +162,28 @@ if __name__ == "__main__":
           raise Exception("SEARCH: invalid input")
         k = int(words[1])
         # Practice 6. Call the function for search
-        found = tree.search(k)
-        if found:
-          outFile.write(str(found.key) + "\n")
-        else:
-          raise Exception("Search failed")
+        pass
       elif op == INORDER:
         # Practice 6. Call the function for inorder traversal
-        tree.writeInorder(outFile)
+        pass
       elif op == PREORDER:
         # Practice 6. Call the function for preorder traversal
-        tree.writePreorder(outFile)
+        pass
       elif op == POSTORDER:
         # Practice 6. Call the function for postorder traversal
-        tree.writePostorder(outFile)
+        pass
       elif op == INSERT:
         if len(words) != 2:
           raise Exception("INSERT: invalid input")
         k = int(words[1])
-        # Practice 7. Call the function for insertion
-        tree.insertNode(k)
-        outFile.write(f"{INSERT} {k}\n")
+        # TODO. Practice 7. Call the function for insertion
+        pass
       elif op == DELETE:
         if len(words) != 2:
           raise Exception("DELETE: invalid input")
         k = int(words[1])
-        # Practice 7. Call the function for deletion
-        found = tree.search(k)
-        if not found:
-          raise Exception("Delete failed")
-        tree.deleteNode(k)
-        outFile.write(f"{DELETE} {k}\n")
+        # TODO. Practice 7. Call the function for deletion
+        pass
       else:
         raise Exception("Undefined operator")
         
